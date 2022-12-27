@@ -55,6 +55,8 @@ export class CodeceptionCommand {
             // the suffix and method name are appended elsewhere
             this.lastOutput = `run ${this.parseFile}:`;
         }
+       
+        this.lastOutput = this.lastOutput.replace(this.pathMappingLocal, this.pathMappingRemote);
 
         return this.lastOutput;
     }
@@ -146,6 +148,28 @@ export class CodeceptionCommand {
         }
 
         return '';
+    }
+
+    /**
+     * Get user's configured command suffix.
+     *
+     * @return {string}
+     */
+    get pathMappingLocal(): string {
+        let pathMappingLocal = this.extConfiguration.get('pathMappingLocal') || '';
+
+        return pathMappingLocal;
+    }
+
+    /**
+     * Get user's configured command suffix.
+     *
+     * @return {string}
+     */
+    get pathMappingRemote(): string {
+        let pathMappingRemote = this.extConfiguration.get('pathMappingRemote') || '';
+
+        return pathMappingRemote;
     }
 
     /**
